@@ -18,8 +18,8 @@
 | Research cyber-safety topic         | Vivek Thapa         | Google/Research    | Week 3   | In progress |
 | Create game content/questions/story | Hadshen             | Scratch            | Week 3   | In progress |
 | Create visual design/assets         | Hangma Limbu        | Canva              | Week 3   | In progress |
-| Build or prepare prototype          | Vivek / Hadshen     | Scratch / Twine    | Week 4   | In progress |
-| Test the prototype                  | Aarbaz              | Prototype testing  | Week 4   | In progress |
+| Build or prepare prototype          | Vivek / Hadshen     | html/css/java scrpt| Week 4   | In progress |
+| Test the prototype                  | Aarbaz              |  prototype testing | Week 4   | In progress |
 | Prepare presentation slides         | Swastika            | PowerPoint / Canva | Week 4   | In progress |
 
 ---
