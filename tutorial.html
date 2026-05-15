@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cyber Run | Tutorial</title>
+    <link rel="stylesheet" href="styles.css?v=runner17" />
+    <link rel="stylesheet" href="tutorial.css?v=runner17" />
+  </head>
+  <body>
+    <main class="game">
+      <div class="city" aria-hidden="true"></div>
+      <div class="grid-floor" aria-hidden="true"></div>
+      <div class="scanline" aria-hidden="true"></div>
+      <header class="topbar">
+        <div class="step-badge">2</div>
+        <div><p class="eyebrow">Welcome Tutorial</p><h1>Learn the Rules</h1></div>
+        <div class="hud">
+          <div class="hud-card"><span>Score</span><strong id="score">0</strong></div>
+          <div class="hud-card"><span>Timer</span><strong id="timer">0:10</strong></div>
+          <div class="hud-card"><span>Lives</span><strong id="lives">3/3</strong></div>
+        </div>
+        <div class="game-controls">
+          <button id="pauseButton" type="button">Pause</button>
+          <button id="restartButton" type="button">Restart</button>
+        </div>
+      </header>
+      <section class="screen screen-tutorial active" id="tutorialScreen">
+        <div class="tutorial-card bubble">
+          <h2>Welcome to Cyber Run!</h2>
+          <p>Spot scams, stay safe, and protect your university account.</p>
+        </div>
+        <div class="bot tutorial-bot" aria-label="ByteBot helper">
+          <div class="antenna"></div><div class="bot-head"><span></span><span></span></div><div class="bot-body"></div>
+        </div>
+        <div class="rules-card">
+          <h2>Rules</h2>
+          <div class="rule"><b>3</b><span>You have 3 lives</span></div>
+          <div class="rule"><b>+5</b><span>Jump to collect green points while running</span></div>
+          <div class="rule"><b>+10</b><span>Correct cyber response adds points</span></div>
+          <div class="rule"><b>-1</b><span>Wrong answer = lose 1 life</span></div>
+        </div>
+        <button class="primary next-button" id="tutorialButton" type="button">Begin Mission</button>
+        <p class="caption">Learn how the game works</p>
+      </section>
+    </main>
+    <script src="game-state.js?v=runner17"></script>
+    <script src="tutorial.js?v=runner17"></script>
+  </body>
+</html>

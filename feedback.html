@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cyber Run | Feedback</title>
+    <link rel="stylesheet" href="styles.css?v=runner17" />
+    <link rel="stylesheet" href="feedback.css?v=runner17" />
+  </head>
+  <body>
+    <main class="game">
+      <div class="city" aria-hidden="true"></div>
+      <div class="grid-floor" aria-hidden="true"></div>
+      <div class="scanline" aria-hidden="true"></div>
+      <header class="topbar">
+        <div class="step-badge">5</div>
+        <div><p class="eyebrow">Answer Feedback</p><h1>Learning Moment</h1></div>
+        <div class="hud">
+          <div class="hud-card"><span>Score</span><strong id="score">0</strong></div>
+          <div class="hud-card"><span>Timer</span><strong id="timer">0:00</strong></div>
+          <div class="hud-card"><span>Lives</span><strong id="lives">3/3</strong></div>
+        </div>
+        <div class="game-controls"><button id="pauseButton" type="button">Pause</button><button id="restartButton" type="button">Restart</button></div>
+      </header>
+      <section class="screen screen-feedback active" id="feedbackScreen">
+        <div class="feedback-visual" id="feedbackVisual">
+          <div class="shield-glow"></div>
+          <div class="hero-kid happy" aria-label="Player feedback character">
+            <div class="hair"></div><div class="face"></div><div class="hoodie"></div><div class="legs"></div>
+          </div>
+          <div class="bot feedback-bot" aria-label="ByteBot helper">
+            <div class="antenna"></div><div class="bot-head"><span></span><span></span></div><div class="bot-body"></div>
+          </div>
+        </div>
+        <div class="feedback-box" id="feedbackBox">
+          <h2 id="feedbackTitle">Correct!</h2>
+          <p id="feedbackText">This is a phishing scam. Never click suspicious links.</p>
+        </div>
+        <button class="primary next-button" id="continueButton" type="button">Continue</button>
+        <p class="caption" id="feedbackCaption">Player learns from feedback</p>
+      </section>
+    </main>
+    <script src="game-state.js?v=runner17"></script>
+    <script src="feedback.js?v=runner17"></script>
+  </body>
+</html>
