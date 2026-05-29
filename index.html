@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cyber Run</title>
+    <link rel="stylesheet" href="styles.css?v=prototype15" />
+  </head>
+  <body>
+    <main class="app" id="app">
+      <div class="skyline" aria-hidden="true"></div>
+      <div class="speed-lines" aria-hidden="true"></div>
+      <div class="grid-floor" aria-hidden="true"></div>
+      <div class="scanline" aria-hidden="true"></div>
+
+      <section class="menu-screen active" id="menuScreen" aria-labelledby="gameTitle">
+        <div class="menu-copy">
+          <p class="eyebrow">University Cyber Defence Simulator</p>
+          <h1 id="gameTitle">Cyber Run</h1>
+          <p class="tagline">Sprint through a neon campus network, dodge phishing traps, and prove you can spot the scam before it steals your account.</p>
+          <div class="menu-actions">
+            <button class="primary-button mega" id="startButton" type="button">Start Run</button>
+            <button class="ghost-button" id="byteBotButton" type="button">Byte Bot</button>
+          </div>
+        </div>
+
+        <div class="profile-panel">
+          <label class="profile-name-row">
+            <span>Pilot Name</span>
+            <input id="playerNameInput" maxlength="18" placeholder="Enter name" autocomplete="nickname" />
+          </label>
+          <button class="ghost-button save-profile-button" id="saveProfileButton" type="button">Save Progress</button>
+          <p class="profile-saved" id="profileSaved">Progress saves on this device.</p>
+          <div>
+            <span>High Score</span>
+            <strong id="highScore">0</strong>
+          </div>
+          <div>
+            <span>Rank</span>
+            <strong id="playerRank">Cyber Rookie</strong>
+          </div>
+          <div>
+            <span>Awareness</span>
+            <strong id="awarenessLevel">Level 1</strong>
+          </div>
+          <div>
+            <span>Achievements</span>
+            <strong id="achievementCount">0/6</strong>
+          </div>
+        </div>
+
+        <div class="hologram-card">
+          <div class="holo-runner" aria-hidden="true">
+            <div class="runner-head"></div>
+            <div class="runner-torso"></div>
+            <div class="runner-arm left"></div>
+            <div class="runner-arm right"></div>
+            <div class="runner-leg left"></div>
+            <div class="runner-leg right"></div>
+          </div>
+          <div class="holo-rings" aria-hidden="true"></div>
+        </div>
+      </section>
+
+      <section class="game-screen" id="gameScreen" aria-label="Cyber Run gameplay">
+        <header class="hud">
+          <div class="hud-card"><span>Score</span><strong id="score">0</strong></div>
+          <div class="hud-card"><span>Level</span><strong id="level">1</strong></div>
+          <div class="hud-card"><span>Combo</span><strong id="combo">x1</strong></div>
+          <div class="hud-card"><span>Speed</span><strong id="speed">1.0</strong></div>
+          <div class="hud-card hearts"><span>Lives</span><strong id="lives">&hearts;&hearts;&hearts;</strong></div>
+          <div class="hud-actions">
+            <button class="icon-button" id="pauseButton" type="button" aria-label="Pause">II</button>
+          </div>
+        </header>
+
+        <div class="runner-stage" id="runnerStage">
+          <div class="run-path" aria-hidden="true"></div>
+          <div class="lane lane-left" aria-hidden="true"></div>
+          <div class="lane lane-center" aria-hidden="true"></div>
+          <div class="lane lane-right" aria-hidden="true"></div>
+          <div class="object-layer" id="objectLayer"></div>
+          <div class="runner cyber-runner running" id="runner" aria-label="Cyber jet">
+            <div class="runner-shadow"></div>
+            <div class="runner-trail"></div>
+            <div class="runner-head"></div>
+            <div class="runner-visor"></div>
+            <div class="runner-torso"></div>
+            <div class="runner-core"></div>
+            <div class="runner-arm left"></div>
+            <div class="runner-arm right"></div>
+            <div class="runner-leg left"></div>
+            <div class="runner-leg right"></div>
+          </div>
+        </div>
+
+        <div class="control-pad" aria-label="Runner controls">
+          <button class="control-button icon-control" data-action="left" type="button" aria-label="Move left">&lsaquo;</button>
+          <button class="control-button icon-control" data-action="right" type="button" aria-label="Move right">&rsaquo;</button>
+        </div>
+      </section>
+
+      <dialog class="phishing-dialog" id="phishingDialog">
+        <div class="dialog-shell">
+          <div class="dialog-header">
+            <div>
+              <p class="eyebrow">Threat Intercepted</p>
+              <h2 id="threatTitle">Phishing Simulation</h2>
+            </div>
+            <div class="decision-timer" id="decisionTimer">15</div>
+          </div>
+          <div class="simulation-card" id="simulationCard"></div>
+          <div class="decision-panel" id="decisionPanel">
+            <p id="decisionQuestion">What should you do with this message?</p>
+            <div class="decision-actions">
+              <button class="decision-button report" data-choice="report" onclick="answerThreat('report')" type="button">Report</button>
+              <button class="decision-button open" data-choice="open" onclick="answerThreat('open')" type="button">Open</button>
+              <button class="decision-button ignore" data-choice="ignore" onclick="answerThreat('ignore')" type="button">Ignore</button>
+              <button class="decision-button reply" data-choice="reply" onclick="answerThreat('reply')" type="button">Reply</button>
+            </div>
+          </div>
+          <div class="feedback-panel hidden" id="feedbackPanel">
+            <h3 id="feedbackTitle">Correct</h3>
+            <p id="feedbackText"></p>
+            <ul id="feedbackClues"></ul>
+            <button class="primary-button" id="continueButton" type="button">Resume Run</button>
+          </div>
+        </div>
+      </dialog>
+
+      <div class="pause-panel hidden" id="pausePanel">
+        <div>
+          <p class="eyebrow">Run Paused</p>
+          <h2>Cyber Run Paused</h2>
+          <p>Movement is frozen. Continue, restart the run, or return to the menu.</p>
+          <button class="primary-button" id="resumeButton" type="button">Play</button>
+          <button class="ghost-button" id="restartButton" type="button">Restart</button>
+          <button class="ghost-button" id="quitButton" type="button">Quit Run</button>
+        </div>
+      </div>
+
+      <div class="guide-panel hidden" id="guidePanel">
+        <div>
+          <div class="bytebot-header">
+            <div class="bytebot-avatar" aria-hidden="true"><span></span><span></span></div>
+            <div>
+              <p class="eyebrow">Assistant Online</p>
+              <h2>Byte Bot</h2>
+            </div>
+          </div>
+          <p class="guide-intro">Hi pilot. I am Byte Bot, your cyber co-pilot. I will help you learn the controls, understand threats, and choose the safest action when a suspicious message appears.</p>
+          <div class="guide-grid">
+            <article>
+              <strong>Move</strong>
+              <p>Use the left and right arrow keys, A/D, swipe, or the on-screen arrows to change lanes.</p>
+            </article>
+            <article>
+              <strong>Score</strong>
+              <p>Collect green point tokens for +5 points. Build combos by collecting cleanly and answering well.</p>
+            </article>
+            <article>
+              <strong>Threats</strong>
+              <p>Red threat boxes pause the run and show an email simulation. Choose Report, Open, Ignore, or Reply.</p>
+            </article>
+            <article>
+              <strong>Win Decisions</strong>
+              <p>Report scam messages. Open legitimate university messages. Wrong choices cost one life.</p>
+            </article>
+          </div>
+          <button class="primary-button" id="closeGuideButton" type="button">Ready, Byte Bot</button>
+        </div>
+      </div>
+
+      <div class="summary-panel hidden" id="summaryPanel">
+        <div>
+          <div class="summary-hero">
+            <div class="summary-orbit" aria-hidden="true"></div>
+            <p class="eyebrow">Run Complete</p>
+            <h2 id="summaryTitle">Training Report</h2>
+            <p class="summary-pilot" id="summaryPilot">Pilot: Guest</p>
+            <div class="summary-rank-row">
+              <span id="summaryRank">Cyber Rookie</span>
+              <strong id="summaryAchievementProgress">0/6 badges</strong>
+            </div>
+            <div class="summary-progress"><span id="summaryProgressBar"></span></div>
+          </div>
+          <div class="summary-grid">
+            <div><span>Final Score</span><strong id="summaryScore">0</strong><small>Network points</small></div>
+            <div><span>Best Combo</span><strong id="summaryCombo">x1</strong><small>Clean streak</small></div>
+            <div><span>Correct Reads</span><strong id="summaryCorrect">0</strong><small>Threat decisions</small></div>
+            <div><span>Mistakes</span><strong id="summaryMistakes">0</strong><small>Lives lost</small></div>
+          </div>
+          <p id="summaryMessage">Good run. Keep sharpening your phishing instincts.</p>
+          <div class="summary-achievements" id="summaryAchievements"></div>
+          <div class="summary-actions">
+            <button class="ghost-button" id="saveRunButton" type="button">Save Progress</button>
+            <button class="primary-button" id="playAgainButton" type="button">Run Again</button>
+            <button class="ghost-button" id="backMenuButton" type="button">Back to Menu</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="achievement-toast hidden" id="achievementToast">
+        <span>Achievement Unlocked</span>
+        <strong id="achievementToastText">First Catch</strong>
+      </div>
+    </main>
+
+    <script src="game.js?v=prototype15"></script>
+  </body>
+</html>
